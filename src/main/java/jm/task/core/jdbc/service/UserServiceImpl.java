@@ -1,35 +1,38 @@
 package jm.task.core.jdbc.service;
 
 
-import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
+import jm.task.core.jdbc.dao.UserDao;
 import jm.task.core.jdbc.model.User;
 
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    UserDaoJDBCImpl userDaoJDBCImpl = new UserDaoJDBCImpl();
+    private final UserDao userDao;
 
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     public void createUsersTable() {
-        userDaoJDBCImpl.createUsersTable();
+        userDao.createUsersTable();
     }
 
     public void dropUsersTable() {
-        userDaoJDBCImpl.dropUsersTable();
+        userDao.dropUsersTable();
     }
 
     public void saveUser(String name, String lastName, byte age) {
-        userDaoJDBCImpl.saveUser(name, lastName, age);
+        userDao.saveUser(name, lastName, age);
         System.out.printf("User с именем — %s добавлен в базу данных\n", name);
     }
 
     public void removeUserById(long id) {
-        userDaoJDBCImpl.removeUserById(id);
+        userDao.removeUserById(id);
     }
 
     public List<User> getAllUsers() {
-        List<User> allUsers = userDaoJDBCImpl.getAllUsers();
+        List<User> allUsers = userDao.getAllUsers();
         for (User user : allUsers) {
             System.out.println(user);
         }
@@ -37,6 +40,6 @@ public class UserServiceImpl implements UserService {
     }
 
     public void cleanUsersTable() {
-        userDaoJDBCImpl.cleanUsersTable();
+        userDao.cleanUsersTable();
     }
 }

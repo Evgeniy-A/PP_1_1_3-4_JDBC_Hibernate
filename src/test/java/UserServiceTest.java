@@ -1,3 +1,4 @@
+import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
@@ -7,7 +8,7 @@ import org.junit.Test;
 import java.util.List;
 
 public class UserServiceTest {
-    private final UserService userService = new UserServiceImpl();
+    private final UserService userService = new UserServiceImpl(new UserDaoJDBCImpl());
 
     private final String testName = "Ivan";
     private final String testLastName = "Ivanov";
@@ -44,8 +45,8 @@ public class UserServiceTest {
             User user = userService.getAllUsers().get(0);
 
             if (!testName.equals(user.getName())
-                    || !testLastName.equals(user.getLastName())
-                    || testAge != user.getAge()
+                || !testLastName.equals(user.getLastName())
+                || testAge != user.getAge()
             ) {
                 Assert.fail("User был некорректно добавлен в базу данных");
             }
@@ -98,5 +99,4 @@ public class UserServiceTest {
             Assert.fail("При тестировании очистки таблицы пользователей произошло исключение\n" + e);
         }
     }
-
 }
