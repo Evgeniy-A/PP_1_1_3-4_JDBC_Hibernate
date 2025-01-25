@@ -1,8 +1,11 @@
 package jm.task.core.jdbc;
 
 
+import jm.task.core.jdbc.dao.UserDao;
+import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
 
 public class Main {
@@ -13,9 +16,10 @@ public class Main {
         User user3 = new User("Mariya", "Romanova", (byte) 20);
         User user4 = new User("Vladimir", "Bochurin", (byte) 21);
 
-        UserDaoJDBCImpl userDao = new UserDaoJDBCImpl();
-        UserServiceImpl userService = new UserServiceImpl(userDao);
+        UserDao userDao = new UserDaoHibernateImpl();
+        UserService userService = new UserServiceImpl(userDao);
         userService.createUsersTable();
+
 
         userService.saveUser(user1.getName(), user1.getLastName(), user1.getAge());
         userService.saveUser(user2.getName(), user2.getLastName(), user2.getAge());

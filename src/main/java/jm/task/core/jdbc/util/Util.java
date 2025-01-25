@@ -35,8 +35,8 @@ public class Util {
                 Configuration configuration = new Configuration();
                 configuration.setProperty("hibernate.connection.url", DB_URL);
                 configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
-                configuration.setProperty("hibernate.connection.username", "root");
-                configuration.setProperty("hibernate.connection.password", "root");
+                configuration.setProperty("hibernate.connection.username", DB_USERNAME);
+                configuration.setProperty("hibernate.connection.password", DB_PASSWORD);
                 configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
                 configuration.setProperty("show_sql", "true");
 
